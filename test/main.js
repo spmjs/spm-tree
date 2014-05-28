@@ -20,6 +20,12 @@ describe('tree', function() {
     JSON.stringify(deps).should.be.eql('[{"name":"indexof","version":"0.0.3","deps":[]}]');
   });
 
+  it('flat js deps', function() {
+    var tree = new Tree('./test/fixtures/deep-deps');
+    var deps = tree.getJSDeps('require(\'move\');', {flat:true});
+    deps.map(function(dep){return dep.name}).join(',').should.be.equal('move,has-translate3d,transform-property,after-transition,has-transitions,css-emitter,event,once,emitter,css-ease,query');
+  });
+
   it('css deps', function() {
     var tree = new Tree('./test/fixtures/css-deps');
     var deps = tree.getCSSDeps('@import \'./a\';@import \'normalize.css\';');

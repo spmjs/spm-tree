@@ -14,14 +14,16 @@ function Tree(root) {
   this.root = root;
 }
 
-Tree.prototype.getJSDeps = function(content) {
+Tree.prototype.getJSDeps = function(content, opt) {
   var deps = detective(content).filter(function(dep) {
     return !isRelative(dep);
   });
-  return this.formatDeps(this.addVersion(deps));
+  deps = this.formatDeps(this.addVersion(deps));
+  if (opt && opt.flat) deps = this.flat(deps);
+  return deps;
 };
 
-Tree.prototype.getCSSDeps = function(content) {
+Tree.prototype.getCSSDeps = function(content, opt) {
   var deps = imports(content);
   deps = deps.map(function(dep) {
     return dep.path;
@@ -29,7 +31,9 @@ Tree.prototype.getCSSDeps = function(content) {
   deps = deps.filter(function(dep) {
     return !isRelative(dep);
   });
-  return this.formatDeps(this.addVersion(deps));
+  deps = this.formatDeps(this.addVersion(deps));
+  if (opt && opt.flat) deps = this.flat(deps);
+  return deps;
 };
 
 Tree.prototype.getInfo = function(filepath) {
@@ -69,6 +73,18 @@ Tree.prototype.formatDeps = function(deps) {
       'sea-modules', k, v, 'package.json');
     ret.push(this.getInfo(filepath));
   }
+  return ret;
+};
+
+Tree.prototype.flat = function(deps) {
+  var ret = [];
+  deps.forEach(function(dep) {
+    ret.push({name:dep.name,version:dep.version});
+    if (dep.deps) {
+      var depdeps = this.flat(dep.deps);
+      ret = Array.prototype.concat.apply(ret, depdeps);
+    }
+  }.bind(this));
   return ret;
 };
 

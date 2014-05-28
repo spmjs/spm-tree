@@ -1,6 +1,6 @@
 {
   "name": "spm-tree",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "get require tree for spm@3x",
   "main": "index.js",
   "scripts": {
