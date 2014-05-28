@@ -1,0 +1,9 @@
+{
+  "name": "css-deps",
+  "version": "0.1.0",
+  "spm": {
+    "dependencies": {
+      "normalize.css": "3.0.1"
+    }
+  }
+}

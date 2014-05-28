@@ -1,0 +1,9 @@
+{
+  "name": "deep-deps",
+  "version": "0.1.0",
+  "spm": {
+    "dependencies": {
+      "move": "0.3.3"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "after-transition",
+  "repo": "yields/after-transition",
+  "description": "Invoke a function after transition or immediately.",
+  "version": "0.0.1",
+  "keywords": [
+    "after",
+    "transitions"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ],
+  "dependencies": {
+    "yields/has-transitions": "*",
+    "ecarter/css-emitter": "*",
+    "component/once": "*"
+  },
+  "spm": {
+    "main": "index.js",
+    "dependencies": {
+      "has-transitions": "0.0.1",
+      "css-emitter": "0.1.1",
+      "once": "0.0.1"
+    }
+  },
+  "homepage": "https://github.com/yields/after-transition"
+}
